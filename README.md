@@ -39,7 +39,7 @@ The Nium MCP Server helps developers build applications for:
 
 ## Installation Guide
 
-> **Before you start:** Replace `https://mcp.sandbox.nium.com/mcp` with your Nium MCP server URL and `YOUR_NIUM_API_KEY` with your Nium API key (sandbox or production). Live API calls require the `x-api-key` header on the MCP HTTP request.
+> **Before you start:** Replace `YOUR_NIUM_API_KEY` with your Nium API key (sandbox or production). Live API calls require the `x-api-key` header on the MCP HTTP request.
 
 ### Quick Install
 
