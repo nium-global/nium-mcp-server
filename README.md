@@ -39,9 +39,16 @@ The Nium MCP Server helps developers build applications for:
 
 > **Before you start:** Replace `YOUR_NIUM_MCP_URL` with your Nium MCP server URL and `YOUR_NIUM_API_KEY` with your Nium API key (sandbox or production). Live API calls require the `x-api-key` header on the MCP HTTP request.
 
+### Quick Install
+
+[![Install in Cursor](https://img.shields.io/badge/Install-Nium_MCP_Cursor-00A67E?style=for-the-badge)](https://cursor.com/mcp/install?server=nium)
+[![Install in VS Code](https://img.shields.io/badge/Install-Nium_MCP_VSCode-0078D4?style=for-the-badge)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22type%22%3A%22http%22%2C%22name%22%3A%22nium-mcp%22%2C%22version%22%3A%221.0.0%22%2C%22description%22%3A%22Build%20and%20integrate%20with%20Nium%20using%20natural%20language%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.nium.com%2Fmcp%22%2C%22author%22%3A%22Nium%22%2C%22tags%22%3A%5B%22nium%22%2C%22payments%22%2C%22mcp%22%5D%2C%22categories%22%3A%5B%22mcp%22%5D%7D)
+
 ---
 
 ### Cursor
+
+[![Install Now](https://img.shields.io/badge/Install_Now-Cursor-00A67E?style=flat-square&logo=cursor)](https://cursor.com/mcp/install?server=nium)
 
 **Files:** Project `.cursor/mcp.json`, or global `~/.cursor/mcp.json`
 
@@ -136,6 +143,8 @@ claude mcp add-json nium '{"type":"http","url":"YOUR_NIUM_MCP_URL","headers":{"x
 ---
 
 ### VS Code
+
+[![Install Now](https://img.shields.io/badge/Install_Now-VS_Code-0078D4?style=flat-square&logo=visualstudiocode)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22type%22%3A%22http%22%2C%22name%22%3A%22nium-mcp%22%2C%22version%22%3A%221.0.0%22%2C%22description%22%3A%22Build%20and%20integrate%20with%20Nium%20using%20natural%20language%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.nium.com%2Fmcp%22%2C%22author%22%3A%22Nium%22%2C%22tags%22%3A%5B%22nium%22%2C%22payments%22%2C%22mcp%22%5D%2C%22categories%22%3A%5B%22mcp%22%5D%7D)
 
 **Files:** Project `.mcp.json`, or global `~/.mcp.json`
 
