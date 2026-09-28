@@ -286,6 +286,14 @@ Put the API key in `env` and reference it from `headers`. Gemini expands `$NIUM_
 
 ---
 
+## Documentation & Resources
+
+For comprehensive documentation, guides, and best practices, visit the official Nium MCP Server documentation:
+
+📖 **[Nium MCP Server Docs](https://docs.nium.com/docs/developers/building-with-ai/nium-mcp-server)** — Complete guides, API references, and integration examples.
+
+---
+
 ## Security & Access
 
 * Sandbox actions are executed only within authorized Nium Sandbox environments.
