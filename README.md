@@ -37,36 +37,29 @@ The Nium MCP Server helps developers build applications for:
 
 ## Installation Guide
 
-### Install on Claude
-
-#### Using Connectors (Requires Claude Subscription)
-
-1. Open Claude
-2. Navigate to **Settings → Connectors**
-3. Click **Add Custom Connector**
-4. Use the URL:
-
-```
-https://mcp.nium.com/mcp
-```
-
-5. Save and restart Claude
+> **Before you start:** Replace `YOUR_NIUM_MCP_URL` with your Nium MCP server URL and `YOUR_NIUM_API_KEY` with your Nium API key (sandbox or production). Live API calls require the `x-api-key` header on the MCP HTTP request.
 
 ---
 
-#### Using Manual Configuration
+### Cursor
 
-Open your `claude_desktop_config.json` file and add:
+**Files:** Project `.cursor/mcp.json`, or global `~/.cursor/mcp.json`
+
+**UI:** Cursor Settings → Tools & MCP → add a new MCP server, then paste JSON.
+
+Put the API key in `env` and reference it from `headers`:
 
 ```json
 {
   "mcpServers": {
-    "nium-mcp": {
-      "command": "npx",
-      "args": [
-        "mcp-remote",
-        "https://mcp.nium.com/mcp"
-      ]
+    "nium": {
+      "url": "YOUR_NIUM_MCP_URL",
+      "headers": {
+        "x-api-key": "${env:NIUM_API_KEY}"
+      },
+      "env": {
+        "NIUM_API_KEY": "YOUR_NIUM_API_KEY"
+      }
     }
   }
 }
@@ -74,24 +67,92 @@ Open your `claude_desktop_config.json` file and add:
 
 ---
 
-### Install in VS Code
+### Claude Desktop
 
-#### One-Click Installation
+**File:**
 
-[![Install Nium MCP](https://img.shields.io/badge/Install-Nium_MCP-0052CC)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22type%22%3A%22http%22%2C%22name%22%3A%22nium-mcp%22%2C%22version%22%3A%221.0.0%22%2C%22description%22%3A%22Build%20and%20integrate%20with%20Nium%20using%20natural%20language%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.nium.com%2Fmcp%22%2C%22author%22%3A%22Nium%22%2C%22tags%22%3A%5B%22nium%22%2C%22payments%22%2C%22mcp%22%5D%2C%22categories%22%3A%5B%22mcp%22%5D%7D)
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+
+**UI:** Settings → Developer → Edit Config. Fully quit and relaunch after saving.
+
+Remote HTTP is not a native `url` entry in this file (Claude Desktop may strip it). Bridge with `mcp-remote` or add a **custom connector** under Settings → Connectors.
+
+```json
+{
+  "mcpServers": {
+    "nium": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "YOUR_NIUM_MCP_URL",
+        "--header",
+        "x-api-key:${NIUM_API_KEY}"
+      ],
+      "env": {
+        "NIUM_API_KEY": "YOUR_NIUM_API_KEY"
+      }
+    }
+  }
+}
+```
+
+⚠️ Keep `x-api-key:${NIUM_API_KEY}` with **no space around `:`**. Put the key (and any spaces) in `env`.
 
 ---
 
-#### Manual Installation
+### Claude Code
 
-Add the following to your `mcp.json` file:
+**Files:** Project `.mcp.json`, or user `~/.claude.json` under top-level `mcpServers`
+
+**CLI:**
+
+```bash
+claude mcp add-json nium '{"type":"http","url":"YOUR_NIUM_MCP_URL","headers":{"x-api-key":"${NIUM_API_KEY}"},"env":{"NIUM_API_KEY":"YOUR_NIUM_API_KEY"}}'
+```
+
+**Project `.mcp.json`:**
+
+```json
+{
+  "mcpServers": {
+    "nium": {
+      "type": "http",
+      "url": "YOUR_NIUM_MCP_URL",
+      "headers": {
+        "x-api-key": "${NIUM_API_KEY}"
+      },
+      "env": {
+        "NIUM_API_KEY": "YOUR_NIUM_API_KEY"
+      }
+    }
+  }
+}
+```
+
+> `"type": "streamable-http"` is accepted as an alias for `"http"`. Entries with `url` but no `type` are treated as stdio and skipped.
+
+---
+
+### VS Code
+
+**Files:** Project `.mcp.json`, or global `~/.mcp.json`
+
+**UI:** VS Code Settings → Extensions → Claude Code → MCP configuration
 
 ```json
 {
   "servers": {
-    "nium-mcp": {
-      "url": "https://mcp.nium.com/mcp",
-      "type": "http"
+    "nium": {
+      "url": "YOUR_NIUM_MCP_URL",
+      "type": "http",
+      "headers": {
+        "x-api-key": "${NIUM_API_KEY}"
+      },
+      "env": {
+        "NIUM_API_KEY": "YOUR_NIUM_API_KEY"
+      }
     }
   }
 }
@@ -99,19 +160,86 @@ Add the following to your `mcp.json` file:
 
 ---
 
-### Install in Cursor
+### Codex
 
-Add the following configuration:
+**File:** `~/.codex/config.toml` (or trusted-project `.codex/config.toml`)
+
+Codex uses **TOML**, not JSON. Read the key from the environment at request time:
+
+```toml
+[mcp_servers.nium]
+url = "YOUR_NIUM_MCP_URL"
+env_http_headers = { "x-api-key" = "NIUM_API_KEY" }
+
+[mcp_servers.nium.env]
+NIUM_API_KEY = "YOUR_NIUM_API_KEY"
+```
+
+> The top-level key is `mcp_servers` (snake_case), not `mcpServers`.
+
+**CLI:**
+
+```bash
+codex mcp add nium --url YOUR_NIUM_MCP_URL
+```
+
+Then add `env_http_headers` and the corresponding `env` entry in `config.toml`.
+
+---
+
+### ChatGPT (Developer Mode)
+
+ChatGPT does not load a project `mcp.json`. Use a remote Streamable HTTP URL.
+
+**Setup:**
+
+1. Settings → Connectors / Apps → enable **Developer mode** (workspace admins may need to allow this)
+2. Create a custom connector / app
+3. MCP server URL: `YOUR_NIUM_MCP_URL`
+4. Authentication: custom header — name `x-api-key`, value `YOUR_NIUM_API_KEY`
+   - If the UI only supports OAuth or Bearer, ChatGPT cannot send Nium's `x-api-key` as expected
+
+> ChatGPT does not support an `env` field for custom connector headers, so store credentials securely outside of JSON configuration.
+
+---
+
+### Gemini CLI
+
+**Files:** `~/.gemini/settings.json`, or project `.gemini/settings.json`
+
+Put the API key in `env` and reference it from `headers`. Gemini expands `$NIUM_API_KEY` / `${NIUM_API_KEY}` (and `%NIUM_API_KEY%` on Windows):
 
 ```json
 {
   "mcpServers": {
-    "nium-mcp": {
-      "url": "https://mcp.nium.com/mcp"
+    "nium": {
+      "httpUrl": "YOUR_NIUM_MCP_URL",
+      "headers": {
+        "x-api-key": "$NIUM_API_KEY"
+      },
+      "env": {
+        "NIUM_API_KEY": "YOUR_NIUM_API_KEY"
+      }
     }
   }
 }
 ```
+
+> Use `httpUrl` for Streamable HTTP. `url` is for SSE — use `httpUrl` for this server.
+
+---
+
+### Configuration Reference
+
+| Client | Config File | HTTP Field | API Key Header |
+|---|---|---|---|
+| **Cursor** | `.cursor/mcp.json` | `url` + `headers` + `env` | `"x-api-key"` |
+| **Claude Desktop** | `claude_desktop_config.json` | `npx mcp-remote` + `--header` + `env` | `x-api-key:${NIUM_API_KEY}` |
+| **Claude Code** | `.mcp.json` | `"type": "http"`, `url`, `headers` + `env` | `"x-api-key"` |
+| **VS Code** | `.mcp.json` | `url`, `headers` + `env` | `"x-api-key"` |
+| **Codex** | `~/.codex/config.toml` | `url` + `env_http_headers` | `"x-api-key"` |
+| **ChatGPT** | Connectors UI | Custom header (no env-backed JSON) | `x-api-key` |
+| **Gemini CLI** | `~/.gemini/settings.json` | `httpUrl` + `headers` + `env` | `"x-api-key"` |
 
 ---
 
