@@ -62,7 +62,7 @@ Put the API key in `env` and reference it from `headers`:
 {
   "mcpServers": {
     "nium": {
-      "url": "https://mcp.sandbox.nium.com/mcp",
+      "url": "https://mcp-sandbox.nium.com/mcp",
       "headers": {
         "x-api-key": "${env:NIUM_API_KEY}"
       },
@@ -95,7 +95,7 @@ Remote HTTP is not a native `url` entry in this file (Claude Desktop may strip i
       "args": [
         "-y",
         "mcp-remote",
-        "https://mcp.sandbox.nium.com/mcp",
+        "https://mcp-sandbox.nium.com/mcp",
         "--header",
         "x-api-key:${NIUM_API_KEY}"
       ],
@@ -118,7 +118,7 @@ Remote HTTP is not a native `url` entry in this file (Claude Desktop may strip i
 **CLI:**
 
 ```bash
-claude mcp add-json nium '{"type":"http","url":"https://mcp.sandbox.nium.com/mcp","headers":{"x-api-key":"${NIUM_API_KEY}"},"env":{"NIUM_API_KEY":"YOUR_NIUM_API_KEY"}}'
+claude mcp add-json nium '{"type":"http","url":"https://mcp-sandbox.nium.com/mcp","headers":{"x-api-key":"${NIUM_API_KEY}"},"env":{"NIUM_API_KEY":"YOUR_NIUM_API_KEY"}}'
 ```
 
 **Project `.mcp.json`:**
@@ -128,7 +128,7 @@ claude mcp add-json nium '{"type":"http","url":"https://mcp.sandbox.nium.com/mcp
   "mcpServers": {
     "nium": {
       "type": "http",
-      "url": "https://mcp.sandbox.nium.com/mcp",
+      "url": "https://mcp-sandbox.nium.com/mcp",
       "headers": {
         "x-api-key": "${NIUM_API_KEY}"
       },
@@ -156,7 +156,7 @@ claude mcp add-json nium '{"type":"http","url":"https://mcp.sandbox.nium.com/mcp
 {
   "servers": {
     "nium": {
-      "url": "https://mcp.sandbox.nium.com/mcp",
+      "url": "https://mcp-sandbox.nium.com/mcp",
       "type": "http",
       "headers": {
         "x-api-key": "${NIUM_API_KEY}"
@@ -179,7 +179,7 @@ Codex uses **TOML**, not JSON. Read the key from the environment at request time
 
 ```toml
 [mcp_servers.nium]
-url = "https://mcp.sandbox.nium.com/mcp"
+url = "https://mcp-sandbox.nium.com/mcp"
 env_http_headers = { "x-api-key" = "NIUM_API_KEY" }
 
 [mcp_servers.nium.env]
@@ -191,7 +191,7 @@ NIUM_API_KEY = "YOUR_NIUM_API_KEY"
 **CLI:**
 
 ```bash
-codex mcp add nium --url https://mcp.sandbox.nium.com/mcp
+codex mcp add nium --url https://mcp-sandbox.nium.com/mcp
 ```
 
 Then add `env_http_headers` and the corresponding `env` entry in `config.toml`.
@@ -206,7 +206,7 @@ ChatGPT does not load a project `mcp.json`. Use a remote Streamable HTTP URL.
 
 1. Settings → Connectors / Apps → enable **Developer mode** (workspace admins may need to allow this)
 2. Create a custom connector / app
-3. MCP server URL: `https://mcp.sandbox.nium.com/mcp`
+3. MCP server URL: `https://mcp-sandbox.nium.com/mcp`
 4. Authentication: custom header — name `x-api-key`, value `YOUR_NIUM_API_KEY`
    - If the UI only supports OAuth or Bearer, ChatGPT cannot send Nium's `x-api-key` as expected
 
@@ -224,7 +224,7 @@ Put the API key in `env` and reference it from `headers`. Gemini expands `$NIUM_
 {
   "mcpServers": {
     "nium": {
-      "httpUrl": "https://mcp.sandbox.nium.com/mcp",
+      "httpUrl": "https://mcp-sandbox.nium.com/mcp",
       "headers": {
         "x-api-key": "$NIUM_API_KEY"
       },
