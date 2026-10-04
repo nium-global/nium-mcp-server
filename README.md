@@ -51,6 +51,7 @@ Only the five `POST` endpoints below are supported for writes (Create Customer v
 **Client Settings**
 
 * Client Details - `GET /api/v1/client/{clientHashId}`
+* Fee Details v2 - `GET /api/v2/client/{clientHashId}/fees`
 * Fee Details V3 - `GET /api/v3/client/{clientHashId}/fees`
 * Get Maximum and Available Limits of Direct Debit - `GET /api/v1/client/{clientHashId}/payin/limits`
 
@@ -81,12 +82,15 @@ Only the five `POST` endpoints below are supported for writes (Create Customer v
 * Exhaustive Corporate Details using Business ID - `GET /api/v2/client/{clientHashId}/corporate/lookup`
 * Fetch Corporate Customer RFI Details - `GET /api/v1/client/{clientHashId}/corporate/rfi`
 * Fetch Corporate Constants - `GET /api/v2/client/{clientHashId}/onboarding/constants`
+* Fetch Public Corporate Details - `GET /api/v1/client/{clientHashId}/corporate/lookup`
 
 **Customer Management**
 
 * Customer List V3 - `GET /api/v3/client/{clientHashId}/customers`
 * Customer Details V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}`
+* Customer Details - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}`
 * Account Statement - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/accounts/statement`
+* Customer List V2 - `GET /api/v2/client/{clientHashId}/customers`
 * Account Statement for the Specified Wallet - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/statement`
 
 **Customer Terms and Conditions**
@@ -159,13 +163,16 @@ Only the five `POST` endpoints below are supported for writes (Create Customer v
 * Beneficiary List V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/beneficiaries`
 * Beneficiary Details V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/beneficiaries/{beneficiaryHashId}`
 * Beneficiary Validation Schema V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/currency/{currencyCode}/validationSchemas`
+* Beneficiary Validation Schema - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/currency/{currencyCode}/validationSchemas`
 * Add Beneficiary V2 - `POST /api/v2/client/{clientHashId}/customer/{customerHashId}/beneficiaries`
 
 **Reference Data**
 
 * Search Routing Code Using Bank Name - `GET /api/v2/client/{clientHashId}/payout/banks`
 * Search Routing Code Using Branch Name - `GET /api/v2/client/{clientHashId}/payout/branches`
+* Fetch Supported Corridors V2 - `GET /api/v2/client/{clientHashId}/supportedCorridors`
 * Fetch Bank Details using Routing Code - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/country/{countryCode}/routingCodeType/{routingCodeType}/routingCodeValue/{routingCodeValue}/routingCode`
+* Fetch Supported Corridors - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/supportedCorridors`
 
 **Payout**
 
@@ -187,6 +194,7 @@ Only the five `POST` endpoints below are supported for writes (Create Customer v
 
 * Card Details V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}`
 * Card List V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/cards`
+* Card List - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/cards`
 
 **Security**
 
@@ -237,14 +245,14 @@ Only the five `POST` endpoints below are supported for writes (Create Customer v
 
 ### Quick Install
 
-[![Install in Cursor](https://img.shields.io/badge/Install-Nium_MCP_Cursor-00A67E?style=for-the-badge)](https://cursor.com/en/install-mcp?name=nium&config=eyJ1cmwiOiJodHRwczovL21jcC1zYW5kYm94Lm5pdW0uY29tL21jcCIsImhlYWRlcnMiOnsieC1hcGkta2V5IjoiWU9VUl9OSVVNX0FQSV9LRVkifX0%3D)
+[![Install in Cursor](https://img.shields.io/badge/Install-Nium_MCP_Cursor-00A67E?style=for-the-badge)](https://cursor.com/en/install-mcp?name=Nium_Sandbox&config=eyJ1cmwiOiJodHRwczovL21jcC1zYW5kYm94Lm5pdW0uY29tL21jcCIsImhlYWRlcnMiOnsieC1hcGkta2V5IjoiWU9VUl9OSVVNX0FQSV9LRVkifX0%3D)
 [![Install in VS Code](https://img.shields.io/badge/Install-Nium_MCP_VSCode-0078D4?style=for-the-badge)](https://insiders.vscode.dev/redirect/mcp/install?name=Nium_Sandbox&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp-sandbox.nium.com%2Fmcp%22%2C%22headers%22%3A%7B%22x-api-key%22%3A%22YOUR_NIUM_API_KEY%22%7D%7D)
 
 ---
 
 ### Cursor
 
-[![Install Now](https://img.shields.io/badge/Install_Now-Cursor-00A67E?style=flat-square&logo=cursor)](https://cursor.com/en/install-mcp?name=nium&config=eyJ1cmwiOiJodHRwczovL21jcC1zYW5kYm94Lm5pdW0uY29tL21jcCIsImhlYWRlcnMiOnsieC1hcGkta2V5IjoiWU9VUl9OSVVNX0FQSV9LRVkifX0%3D)
+[![Install Now](https://img.shields.io/badge/Install_Now-Cursor-00A67E?style=flat-square&logo=cursor)](https://cursor.com/en/install-mcp?name=Nium_Sandbox&config=eyJ1cmwiOiJodHRwczovL21jcC1zYW5kYm94Lm5pdW0uY29tL21jcCIsImhlYWRlcnMiOnsieC1hcGkta2V5IjoiWU9VUl9OSVVNX0FQSV9LRVkifX0%3D)
 
 **Files:** Project `.cursor/mcp.json`, or global `~/.cursor/mcp.json`
 
