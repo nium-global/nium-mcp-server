@@ -137,7 +137,6 @@ Only the five `POST` endpoints below are supported for writes (Create Customer v
 
 **Customer Virtual Accounts**
 
-* Virtual Account Details - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/paymentIds`
 * Virtual Account Details V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/paymentIds`
 * Account Ownership Certificate - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/accountOwnershipCertificate`
 
