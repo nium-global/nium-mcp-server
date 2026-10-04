@@ -63,7 +63,7 @@ Put the API key in `env` and reference it from `headers`:
 ```json
 {
   "mcpServers": {
-    "Nium_Sandbox": {
+    "nium": {
       "url": "https://mcp-sandbox.nium.com/mcp",
       "headers": {
         "x-api-key": "${env:NIUM_API_KEY}"
@@ -120,7 +120,7 @@ Remote HTTP is not a native `url` entry in this file (Claude Desktop may strip i
 **CLI:**
 
 ```bash
-claude mcp add-json Nium_Sandbox '{"type":"http","url":"https://mcp-sandbox.nium.com/mcp","headers":{"x-api-key":"${NIUM_API_KEY}"},"env":{"NIUM_API_KEY":"YOUR_NIUM_API_KEY"}}'
+claude mcp add-json nium '{"type":"http","url":"https://mcp-sandbox.nium.com/mcp","headers":{"x-api-key":"${NIUM_API_KEY}"},"env":{"NIUM_API_KEY":"YOUR_NIUM_API_KEY"}}'
 ```
 
 **Project `.mcp.json`:**
@@ -157,7 +157,8 @@ After clicking, VS Code asks you to confirm the install. Then run **MCP: Open Us
 ```json
 {
   "servers": {
-    "Nium_Sandbox": {
+    "nium": {
+      "url": "https://mcp-sandbox.nium.com/mcp",
       "type": "http",
       "url": "https://mcp-sandbox.nium.com/mcp",
       "headers": {
@@ -200,7 +201,7 @@ Set `NIUM_API_KEY` in your environment, or replace the header value with your ke
 Codex uses **TOML**, not JSON. Read the key from the environment at request time:
 
 ```toml
-[mcp_servers.Nium_Sandbox]
+[mcp_servers.nium]
 url = "https://mcp-sandbox.nium.com/mcp"
 env_http_headers = { "x-api-key" = "NIUM_API_KEY" }
 
@@ -213,7 +214,7 @@ NIUM_API_KEY = "YOUR_NIUM_API_KEY"
 **CLI:**
 
 ```bash
-codex mcp add Nium_Sandbox --url https://mcp-sandbox.nium.com/mcp
+codex mcp add nium --url https://mcp-sandbox.nium.com/mcp
 ```
 
 Then manually add `env_http_headers` and the `[mcp_servers.Nium_Sandbox.env]` entry to `config.toml`.
@@ -229,7 +230,7 @@ ChatGPT does not load a project `mcp.json`. Use a remote Streamable HTTP URL.
 1. Settings → Connectors / Apps → enable **Developer mode** (workspace admins may need to allow this)
 2. Create a custom connector / app
 3. MCP server URL: `https://mcp-sandbox.nium.com/mcp`
-4. Add a custom header — name `x-api-key`, value `YOUR_NIUM_API_KEY`
+4. Authentication: custom header — name `x-api-key`, value `YOUR_NIUM_API_KEY`
    - If the UI only supports OAuth or Bearer, ChatGPT cannot send Nium's `x-api-key` as expected
 5. Scan tools, then enable the connector in chat
 
@@ -246,7 +247,7 @@ Put the API key in `env` and reference it from `headers`. Gemini expands `$NIUM_
 ```json
 {
   "mcpServers": {
-    "Nium_Sandbox": {
+    "nium": {
       "httpUrl": "https://mcp-sandbox.nium.com/mcp",
       "headers": {
         "x-api-key": "$NIUM_API_KEY"
