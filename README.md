@@ -37,6 +37,207 @@ The Nium MCP Server helps developers build applications for:
 
 ---
 
+## Supported APIs
+
+The Nium MCP Server allows you to integrate with Nium APIs through LLM function calling, using the MCP clients listed below. It currently supports the whitelisted APIs listed here: all `GET` endpoints from the [Nium API Reference](https://docs.nium.com/api), plus a limited set of `POST` endpoints for onboarding, beneficiaries, payouts, and sandbox simulation. Endpoints are grouped by API reference section, and `{...}` values in each path are path parameters.
+
+Only the five `POST` endpoints below are supported for writes (Create Customer v5, Create a Session, Add Beneficiary V2, Transfer Money, and the sandbox-only Simulate Receiving a Transaction). All other `POST`, `PUT`, `PATCH`, and `DELETE` operations are not supported.
+
+**Client Prefund Account**
+
+* Fetch Client Prefund Request - `GET /api/v1/client/{clientHashId}/prefundList`
+* Client Prefund Balances - `GET /api/v1/client/{clientHashId}/balances`
+
+**Client Settings**
+
+* Client Details - `GET /api/v1/client/{clientHashId}`
+* Fee Details v2 - `GET /api/v2/client/{clientHashId}/fees`
+* Fee Details V3 - `GET /api/v3/client/{clientHashId}/fees`
+* Get Maximum and Available Limits of Direct Debit - `GET /api/v1/client/{clientHashId}/payin/limits`
+
+**Client Transactions**
+
+* Client Transactions - `GET /api/v1/client/{clientHashId}/transactions`
+
+**User Management**
+
+* List Users - `GET /api/v1/client/{clientHashId}/users`
+* Get User - `GET /api/v1/client/{clientHashId}/user/{userHashId}`
+
+**Customer Onboarding V5**
+
+* List Customers v5 - `GET /api/v5/client/{clientHashId}/customers`
+* List Hosted Form Applications - `GET /api/v5/client/{clientHashId}/applications`
+* Get Customer v5 - `GET /api/v5/client/{clientHashId}/customer/{customerHashId}`
+* Fetch Public Corporate Details - `GET /api/v5/client/{clientHashId}/corporate/publicDetails`
+* Fetch Exhaustive Corporate Details - `GET /api/v5/client/{clientHashId}/corporate/exhaustiveDetailsSearch`
+* Create Customer v5 - `POST /api/v5/client/{clientHashId}/customers`
+
+**Customer Account - Individual**
+
+* Fetch Individual Customer RFI Details - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/rfi`
+
+**Customer Account - Corporate**
+
+* Exhaustive Corporate Details using Business ID - `GET /api/v2/client/{clientHashId}/corporate/lookup`
+* Fetch Corporate Customer RFI Details - `GET /api/v1/client/{clientHashId}/corporate/rfi`
+* Fetch Corporate Constants - `GET /api/v2/client/{clientHashId}/onboarding/constants`
+* Fetch Public Corporate Details - `GET /api/v1/client/{clientHashId}/corporate/lookup`
+
+**Customer Management**
+
+* Customer List V3 - `GET /api/v3/client/{clientHashId}/customers`
+* Customer Details V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}`
+* Customer Details - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}`
+* Account Statement - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/accounts/statement`
+* Customer List V2 - `GET /api/v2/client/{clientHashId}/customers`
+* Account Statement for the Specified Wallet - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/statement`
+
+**Customer Terms and Conditions**
+
+* Terms and Conditions - `GET /api/v1/client/{clientHashId}/termsAndConditions`
+
+**Open Banking (Onboarding)**
+
+* Account Details By Customer Consent ID. - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/consent/account`
+* Payment Details by System Reference Number - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/consent/payment`
+
+**Accounts**
+
+* Fetch linked bank accounts - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/bankAccounts`
+* Fetch linked bank account - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/bankAccounts/{bankAccountId}`
+
+**Onboarding Forms - Corporate**
+
+* Regenerate Onboarding Form URL - `GET /api/v1/client/{clientHashId}/applications/{applicationId}/regenerateURL`
+* Fetch Application Details - `GET /api/v1/client/{clientHashId}/application/{applicationId}`
+
+**Sessions**
+
+* Create a Session - `POST /api/v1/client/{clientHashId}/sessions`
+
+**Files**
+
+* Fetch File Details - `GET /api/v1/client/{clientHashId}/files/{fileId}`
+
+**Customer Wallet Balance**
+
+* Wallet Balance - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}`
+* Fetch Wallet - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet`
+
+**Customer Wallet Transactions**
+
+* Transactions - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/transactions`
+* Download Transaction Receipt - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/transactions/{systemReferenceNumber}/receipt`
+
+**Customer Funding**
+
+* Get Funding instrument details - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/fundingInstruments/{fundingInstrumentId}/fundingInstrumentDetails`
+* Get Funding Instrument List - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/fundingInstruments`
+
+**Customer Virtual Accounts**
+
+* Virtual Account Details - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/paymentIds`
+* Virtual Account Details V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/paymentIds`
+* Account Ownership Certificate - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/accountOwnershipCertificate`
+
+**Rates**
+
+* Exchange Rate V2 - `GET /api/v2/exchangeRate`
+* Fetch historic aggregated exchange rates - `GET /api/v1/exchangeRates/aggregate`
+
+**Quotes**
+
+* Fetch Quote by ID - `GET /api/v1/client/{clientHashId}/quotes/{quoteId}`
+
+**Conversions**
+
+* Fetch Conversion by id - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/conversions/{conversionId}`
+
+**Quotes (Previous Version)**
+
+* Exchange Rate With Markup - `GET /api/v1/client/{clientHashId}/exchangeRate`
+* Exchange Rate Lock and Hold - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/lockExchangeRate`
+
+**Beneficiary**
+
+* Beneficiary List V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/beneficiaries`
+* Beneficiary Details V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/beneficiaries/{beneficiaryHashId}`
+* Beneficiary Validation Schema V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/currency/{currencyCode}/validationSchemas`
+* Beneficiary Validation Schema - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/currency/{currencyCode}/validationSchemas`
+* Add Beneficiary V2 - `POST /api/v2/client/{clientHashId}/customer/{customerHashId}/beneficiaries`
+
+**Reference Data**
+
+* Search Routing Code Using Bank Name - `GET /api/v2/client/{clientHashId}/payout/banks`
+* Search Routing Code Using Branch Name - `GET /api/v2/client/{clientHashId}/payout/branches`
+* Fetch Supported Corridors V2 - `GET /api/v2/client/{clientHashId}/supportedCorridors`
+* Fetch Bank Details using Routing Code - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/country/{countryCode}/routingCodeType/{routingCodeType}/routingCodeValue/{routingCodeValue}/routingCode`
+* Fetch Supported Corridors - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/supportedCorridors`
+
+**Payout**
+
+* Fetch Remittance Life Cycle Status - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/remittance/{systemReferenceNumber}/audit`
+* Purpose of Transfer - `GET /api/v1/remittance/purposeCodes`
+* Get Proof Of Payment - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/remittance/{systemReferenceNumber}/receipt`
+* Fetch Supported Corridors V3 - `GET /api/v3/client/{clientHashId}/supportedCorridors`
+* List Payouts in a Batch - `GET /api/v1/client/{clientHashId}/payout/bulk/{batchId}`
+* Fetch Batch Payout Status - `GET /api/v1/client/{clientHashId}/payout/bulk/{batchId}/status`
+* Transfer Money - `POST /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/remittance`
+
+**Nium Verify**
+
+* Fetch Verification - `GET /api/v1/client/{clientHashId}/verifications/{verificationId}`
+* List Verifications - `GET /api/v1/client/{clientHashId}/verifications`
+* Fetch validation schema for Nium Verify - `GET /api/v1/client/{clientHashId}/schema`
+
+**Lifecycle**
+
+* Card Details V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}`
+* Card List V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/cards`
+* Card List - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/cards`
+
+**Security**
+
+* Fetch card data encrypted - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/retrieve`
+* Fetch Pin Status - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/pin/status`
+* Fetch ATM Pin V2 - `GET /api/v2/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/pin`
+* Show Security Details Encrypted - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/showSecurityDetails`
+
+**3DS**
+
+* 3DS Passcode Enrollment Status - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/3ds/passcode/status`
+
+**Controls**
+
+* Get Channel Restriction - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/channels`
+* Get MCC Channel Restrictions - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/channels/mcc`
+* Fetch Card Limits - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/card/{cardHashId}/limits`
+* Limits For All Cards For A Customer - `GET /api/v1/client/{clientHashId}/customer/{customerHashId}/wallet/{walletHashId}/limits`
+
+**Cards Reference Data**
+
+* Reference Exchange Rate - `GET /api/v1/client/{clientHashId}/referenceRate`
+
+**Request for Information**
+
+* Fetch Single RFI - `GET /api/v5/client/{clientHashId}/rfi/{rfiId}`
+* Fetch RFI Details - `GET /api/v5/client/{clientHashId}/customer/{customerHashId}/rfis`
+
+**Reports**
+
+* Download generated report - `GET /api/v1/client/{clientHashId}/report/{reportRequestId}/download`
+
+**Payin**
+
+* Simulate Receiving a Transaction _(Sandbox only)_ - `POST /api/v1/inward/payment/manual`
+
+**Customer**
+
+* Fetch micro-deposit details _(Sandbox only)_ - `GET /api/v1/simulations/client/{clientHashId}/customer/{customerHashId}/bankAccounts/{bankAccountId}/microDeposits`
+
+---
+
 ## Installation Guide
 
 > **Before you start:** Get your API key from the [Nium Portal](https://app.nium.com) under **Settings → API Keys** (sandbox access is instant). Replace `YOUR_NIUM_API_KEY` in the configs below with it. Live API calls require the `x-api-key` header on the MCP HTTP request.
