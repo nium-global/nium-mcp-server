@@ -39,18 +39,20 @@ The Nium MCP Server helps developers build applications for:
 
 ## Installation Guide
 
-> **Before you start:** Replace `YOUR_NIUM_API_KEY` with your Nium API key (sandbox or production). Live API calls require the `x-api-key` header on the MCP HTTP request.
+> **Before you start:** Get your API key from the [Nium Portal](https://app.nium.com) under **Settings → API Keys** (sandbox access is instant). Replace `YOUR_NIUM_API_KEY` in the configs below with it. Live API calls require the `x-api-key` header on the MCP HTTP request.
+>
+> After using a one-click **Install** button, replace the `YOUR_NIUM_API_KEY` placeholder in the generated server entry with your key.
 
 ### Quick Install
 
-[![Install in Cursor](https://img.shields.io/badge/Install-Nium_MCP_Cursor-00A67E?style=for-the-badge)](https://cursor.com/mcp/install?server=nium)
-[![Install in VS Code](https://img.shields.io/badge/Install-Nium_MCP_VSCode-0078D4?style=for-the-badge)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22type%22%3A%22http%22%2C%22name%22%3A%22nium-mcp%22%2C%22version%22%3A%221.0.0%22%2C%22description%22%3A%22Build%20and%20integrate%20with%20Nium%20using%20natural%20language%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.nium.com%2Fmcp%22%2C%22author%22%3A%22Nium%22%2C%22tags%22%3A%5B%22nium%22%2C%22payments%22%2C%22mcp%22%5D%2C%22categories%22%3A%5B%22mcp%22%5D%7D)
+[![Install in Cursor](https://img.shields.io/badge/Install-Nium_MCP_Cursor-00A67E?style=for-the-badge)](https://cursor.com/en/install-mcp?name=Nium_Sandbox&config=eyJ1cmwiOiJodHRwczovL21jcC1zYW5kYm94Lm5pdW0uY29tL21jcCIsImhlYWRlcnMiOnsieC1hcGkta2V5IjoiWU9VUl9OSVVNX0FQSV9LRVkifX0%3D)
+[![Install in VS Code](https://img.shields.io/badge/Install-Nium_MCP_VSCode-0078D4?style=for-the-badge)](https://insiders.vscode.dev/redirect/mcp/install?name=Nium_Sandbox&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp-sandbox.nium.com%2Fmcp%22%2C%22headers%22%3A%7B%22x-api-key%22%3A%22YOUR_NIUM_API_KEY%22%7D%7D)
 
 ---
 
 ### Cursor
 
-[![Install Now](https://img.shields.io/badge/Install_Now-Cursor-00A67E?style=flat-square&logo=cursor)](https://cursor.com/mcp/install?server=nium)
+[![Install Now](https://img.shields.io/badge/Install_Now-Cursor-00A67E?style=flat-square&logo=cursor)](https://cursor.com/en/install-mcp?name=Nium_Sandbox&config=eyJ1cmwiOiJodHRwczovL21jcC1zYW5kYm94Lm5pdW0uY29tL21jcCIsImhlYWRlcnMiOnsieC1hcGkta2V5IjoiWU9VUl9OSVVNX0FQSV9LRVkifX0%3D)
 
 **Files:** Project `.cursor/mcp.json`, or global `~/.cursor/mcp.json`
 
@@ -90,7 +92,7 @@ Remote HTTP is not a native `url` entry in this file (Claude Desktop may strip i
 ```json
 {
   "mcpServers": {
-    "nium": {
+    "Nium_Sandbox": {
       "command": "npx",
       "args": [
         "-y",
@@ -126,7 +128,7 @@ claude mcp add-json nium '{"type":"http","url":"https://mcp-sandbox.nium.com/mcp
 ```json
 {
   "mcpServers": {
-    "nium": {
+    "Nium_Sandbox": {
       "type": "http",
       "url": "https://mcp-sandbox.nium.com/mcp",
       "headers": {
@@ -146,11 +148,11 @@ claude mcp add-json nium '{"type":"http","url":"https://mcp-sandbox.nium.com/mcp
 
 ### VS Code
 
-[![Install Now](https://img.shields.io/badge/Install_Now-VS_Code-0078D4?style=flat-square&logo=visualstudiocode)](https://insiders.vscode.dev/redirect?url=vscode:mcp/install?%7B%22type%22%3A%22http%22%2C%22name%22%3A%22nium-mcp%22%2C%22version%22%3A%221.0.0%22%2C%22description%22%3A%22Build%20and%20integrate%20with%20Nium%20using%20natural%20language%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.nium.com%2Fmcp%22%2C%22author%22%3A%22Nium%22%2C%22tags%22%3A%5B%22nium%22%2C%22payments%22%2C%22mcp%22%5D%2C%22categories%22%3A%5B%22mcp%22%5D%7D)
+[![Install Now](https://img.shields.io/badge/Install_Now-VS_Code-0078D4?style=flat-square&logo=visualstudiocode)](https://insiders.vscode.dev/redirect/mcp/install?name=Nium_Sandbox&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp-sandbox.nium.com%2Fmcp%22%2C%22headers%22%3A%7B%22x-api-key%22%3A%22YOUR_NIUM_API_KEY%22%7D%7D)
 
-**Files:** Project `.mcp.json`, or global `~/.mcp.json`
+After clicking, VS Code asks you to confirm the install. Then run **MCP: Open User Configuration** from the Command Palette and replace `YOUR_NIUM_API_KEY` in the `headers` section with your API key.
 
-**UI:** VS Code Settings → Extensions → Claude Code → MCP configuration
+**Or configure manually** — add to `.vscode/mcp.json` in your workspace:
 
 ```json
 {
@@ -158,16 +160,37 @@ claude mcp add-json nium '{"type":"http","url":"https://mcp-sandbox.nium.com/mcp
     "nium": {
       "url": "https://mcp-sandbox.nium.com/mcp",
       "type": "http",
+      "url": "https://mcp-sandbox.nium.com/mcp",
       "headers": {
-        "x-api-key": "${NIUM_API_KEY}"
-      },
-      "env": {
-        "NIUM_API_KEY": "YOUR_NIUM_API_KEY"
+        "x-api-key": "${env:NIUM_API_KEY}"
       }
     }
   }
 }
 ```
+
+Set `NIUM_API_KEY` in your shell environment or in a `.env` file at the workspace root.
+
+---
+
+### Antigravity
+
+Add to your Antigravity workspace settings or config file, then restart Antigravity or reload the workspace:
+
+```json
+{
+  "mcpServers": {
+    "Nium_Sandbox": {
+      "url": "https://mcp-sandbox.nium.com/mcp",
+      "headers": {
+        "x-api-key": "${env:NIUM_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+Set `NIUM_API_KEY` in your environment, or replace the header value with your key directly.
 
 ---
 
@@ -182,7 +205,7 @@ Codex uses **TOML**, not JSON. Read the key from the environment at request time
 url = "https://mcp-sandbox.nium.com/mcp"
 env_http_headers = { "x-api-key" = "NIUM_API_KEY" }
 
-[mcp_servers.nium.env]
+[mcp_servers.Nium_Sandbox.env]
 NIUM_API_KEY = "YOUR_NIUM_API_KEY"
 ```
 
@@ -194,7 +217,7 @@ NIUM_API_KEY = "YOUR_NIUM_API_KEY"
 codex mcp add nium --url https://mcp-sandbox.nium.com/mcp
 ```
 
-Then add `env_http_headers` and the corresponding `env` entry in `config.toml`.
+Then manually add `env_http_headers` and the `[mcp_servers.Nium_Sandbox.env]` entry to `config.toml`.
 
 ---
 
@@ -209,6 +232,7 @@ ChatGPT does not load a project `mcp.json`. Use a remote Streamable HTTP URL.
 3. MCP server URL: `https://mcp-sandbox.nium.com/mcp`
 4. Authentication: custom header — name `x-api-key`, value `YOUR_NIUM_API_KEY`
    - If the UI only supports OAuth or Bearer, ChatGPT cannot send Nium's `x-api-key` as expected
+5. Scan tools, then enable the connector in chat
 
 > ChatGPT does not support an `env` field for custom connector headers, so store credentials securely outside of JSON configuration.
 
@@ -240,6 +264,20 @@ Put the API key in `env` and reference it from `headers`. Gemini expands `$NIUM_
 
 ---
 
+### Any other MCP client
+
+If your client supports Streamable HTTP servers, use:
+
+| Setting | Value |
+|---|---|
+| Nium MCP Server URL | `https://mcp-sandbox.nium.com/mcp` |
+| Header name | `x-api-key` |
+| Header value | your Nium API key |
+
+If your client only supports stdio, use `mcp-remote` as a proxy (see the Claude Desktop section).
+
+---
+
 ### Configuration Reference
 
 | Client | Config File | HTTP Field | API Key Header |
@@ -247,7 +285,8 @@ Put the API key in `env` and reference it from `headers`. Gemini expands `$NIUM_
 | **Cursor** | `.cursor/mcp.json` | `url` + `headers` + `env` | `"x-api-key"` |
 | **Claude Desktop** | `claude_desktop_config.json` | `npx mcp-remote` + `--header` + `env` | `x-api-key:${NIUM_API_KEY}` |
 | **Claude Code** | `.mcp.json` | `"type": "http"`, `url`, `headers` + `env` | `"x-api-key"` |
-| **VS Code** | `.mcp.json` | `url`, `headers` + `env` | `"x-api-key"` |
+| **VS Code** | `.vscode/mcp.json` | `servers` → `"type": "http"`, `url` + `headers` | `"x-api-key"` |
+| **Antigravity** | workspace MCP config | `url` + `headers` | `"x-api-key"` |
 | **Codex** | `~/.codex/config.toml` | `url` + `env_http_headers` | `"x-api-key"` |
 | **ChatGPT** | Connectors UI | Custom header (no env-backed JSON) | `x-api-key` |
 | **Gemini CLI** | `~/.gemini/settings.json` | `httpUrl` + `headers` + `env` | `"x-api-key"` |
